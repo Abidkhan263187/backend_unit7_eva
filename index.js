@@ -14,7 +14,7 @@ app.use(cors())
 
 app.get('/',(req,res)=>{
 
-    res.send("getting all the todos from DB")
+    res.json("getting all the todos from DB")
 })
 
 
