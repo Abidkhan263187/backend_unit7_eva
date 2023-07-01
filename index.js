@@ -15,6 +15,10 @@ app.use(cors({
     origin: '*'
   })) 
 
+  app.get('/',()=>{
+    res.send({mssg:"getting response from home pagge"})
+  })
+
 app.use('/user',todoUserRouter)
 
 app.use('/todo',todoCrudRouter)
