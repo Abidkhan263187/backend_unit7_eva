@@ -35,7 +35,7 @@ const authenticate = (req, res, next) => {
 
 
 //get
-todoCrudRouter.get("/", authenticate, async (req, res) => {
+todoCrudRouter.get("/", async (req, res) => {
     const { status, tag, todoID } = req.query;
     const query = { userID: req.userID };
   
