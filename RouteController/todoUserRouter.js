@@ -50,7 +50,7 @@ todoUserRouter.post('/login', async (req, res) => {
 
     } catch (error) {
         console.log(error)
-        res.status(500).send("login failed")
+        res.status(500).json("login failed")
         console.log("error while signup")
     }
 
