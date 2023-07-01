@@ -45,12 +45,12 @@ todoUserRouter.post('/login', async (req, res) => {
             return res.status(404).send({ mssg: "invalid password" })
         }
         const token = jwt.sign({ userID: getUser._id }, process.env.SECRET);
-        res.json({ mssg: "login successful", token })
+        res.send({ mssg: "login successful", token })
         console.log("login successful")
 
     } catch (error) {
         console.log(error)
-        res.status(500).json("login failed")
+        res.status(500).send("login failed")
         console.log("error while signup")
     }
 
