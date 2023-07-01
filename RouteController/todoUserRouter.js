@@ -32,26 +32,28 @@ todoUserRouter.post('/signup', async (req, res) => {
 
 todoUserRouter.post('/login', async (req, res) => {
     const { email, password } = req.body;
-  
+    const getUser = await todoUserModel.findOne({ email: email })
+    console.log(getUser)
     try {
-      const user = await todoUserModel.findOne({ email: email });
-  
-      if (!user) {
-        return res.status(404).json({ mssg: "User not found" });
-      }
-  
-      const passwordMatch = bcrypt.compareSync(password, user.password);
-      if (!passwordMatch) {
-        return res.status(401).json({ mssg: "Invalid password" });
-      }
-  
-      const token = jwt.sign({ userID: user._id }, process.env.SECRET);
-      return res.json({ mssg: "Login successful", token });
+
+        if (!getUser) {
+            return res.status(404).send({ mssg: "user not found" })
+        }
+        const verify = bcrypt.compareSync(password, getUser.password);
+        console.log(verify)
+        if (!verify) {
+            return res.status(404).send({ mssg: "invalid password" })
+        }
+        const token = jwt.sign({ userID: getUser._id }, process.env.SECRET);
+        res.json({ mssg: "login successful", token })
+        console.log("login successful")
+
     } catch (error) {
-      console.log(error);
-      return res.status(500).json({ mssg: "Login failed" });
+        console.log(error)
+        res.status(500).send("login failed")
+        console.log("error while signup")
     }
-  });
-  
+
+})
 
 module.exports = { todoUserRouter }
