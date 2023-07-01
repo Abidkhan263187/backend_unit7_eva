@@ -15,7 +15,7 @@ app.use(cors({
     origin: '*'
   })) 
 
-  app.get('/',()=>{
+  app.get('/',(req,res)=>{
     res.send({mssg:"getting response from home pagge"})
   })
 
